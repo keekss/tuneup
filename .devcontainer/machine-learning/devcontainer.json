@@ -1,9 +1,6 @@
 {
     "name": "Machine Learning",
-    "build": {
-        "dockerfile": "Dockerfile",
-        "context": "."
-    },
+    "image": "ghcr.io/keekss/codespaces-machine-learning:latest",
     "containerEnv": {
         "CODESPACE_ENV": "machine-learning",
         "DEVCONTAINER_NAME": "Machine Learning"
