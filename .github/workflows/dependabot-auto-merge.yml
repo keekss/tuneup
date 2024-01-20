@@ -1,56 +1,21 @@
-name: Auto Merge Dependabot PRs and Delete Old Dependabot Branches
+name: Dependabot auto-approve
+on: pull_request
 
-on:
-  pull_request_target:
-    types:
-      - opened
-      - synchronize
-      - reopened
-  workflow_dispatch: {}
+permissions:
+  pull-requests: write
 
 jobs:
-  auto-merge:
+  dependabot:
     runs-on: ubuntu-latest
+    if: github.actor == 'dependabot[bot]'
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Auto merge
-        uses: actions/github-script@v4
+      - name: Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v1
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const { owner, repo } = context.repo
-      
-            const prs = await github.pulls.list({
-              owner,
-              repo,
-              state: 'open'
-            })
-      
-            for (const pr of prs.data) {
-              if (pr.user.login === 'dependabot[bot]') {
-                // Check if the PR is for a dependency we want to auto-merge
-                const dependencyName = pr.title.split(' ')[1]
-                const autoMergeDependencies = ['dependency1', 'dependency2', 'dependency3']
-                if (autoMergeDependencies.includes(dependencyName)) {
-                  try {
-                    await github.pulls.merge({
-                      owner,
-                      repo,
-                      pull_number: pr.number
-                    })
-                    console.log(`Merged PR #${pr.number}`)
-      
-                    await github.git.deleteRef({
-                      owner,
-                      repo,
-                      ref: `heads/${pr.head.ref}`
-                    })
-                    console.log(`Deleted branch ${pr.head.ref}`)
-                  } catch (error) {
-                    console.log(`Failed to merge and delete branch for PR #${pr.number}: ${error.message}`)
-                  }
-                }
-              }
-            }
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+      - name: Approve a PR
+        run: gh pr review --approve "$PR_URL"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
