@@ -1,14 +1,25 @@
 {
-    "editor.wordWrap": "on",
-    "editor.lineNumbers": "on",
-
-    "explorer.confirmDragAndDrop": false,
-
     "git.autofetch": true,
     "git.enableSmartCommit": true,
     "git.smartCommitChanges": "all",
 
     "workbench.colorTheme": "One Dark Pro Darker",
+
+    "workbench.colorCustomizations": {
+        "editorCursor.foreground": "#fefe04"
+    },
+
+    "editor.cursorBlinking": "smooth",
+    "editor.cursorStyle": "line",
+    "editor.cursorWidth": 3,
+
+    "editor.fontFamily": "'Fira Code', Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontSize": 13,
+
+    "editor.wordWrap": "on",
+    "editor.lineNumbers": "on",
+
+    "explorer.confirmDragAndDrop": false,
 
     "terminal.integrated.allowChords": true,
     "terminal.integrated.defaultProfile.linux": "zsh",

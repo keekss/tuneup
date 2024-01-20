@@ -1,4 +1,4 @@
-FROM ghcr.io/keekss/codespaces-machine-learning:latest
+FROM ghcr.io/keekss/codespaces-base:latest
 
 # Run package installation script
 COPY install-packages.sh /tmp/

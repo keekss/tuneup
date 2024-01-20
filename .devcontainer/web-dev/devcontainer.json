@@ -1,9 +1,6 @@
 {
     "name": "Web Development",
-    "build": {
-        "dockerfile": "Dockerfile",
-        "context": "."
-    },
+    "image": "ghcr.io/keekss/codespaces-web-dev:latest",
     "containerEnv": {
         "CODESPACE_ENV": "web-dev",
         "DEVCONTAINER_NAME": "Web Development"

@@ -11,6 +11,7 @@
         "eamodio.gitlens",
         "mhutchie.git-graph",
         "GitHub.vscode-github-actions",
+        "donjayamanne.githistory",
         
         // Development / workflow
         "GitHub.copilot",
